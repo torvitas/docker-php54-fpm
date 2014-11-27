@@ -1,0 +1,21 @@
+[Unit]
+Description=PHP54-FPM Container
+Requires=docker.service
+Requires=###NAMESPACE###-mariadb.service
+After=###NAMESPACE###-mariadb.service
+
+[Service]
+EnvironmentFile=/etc/systemd/system/###NAMESPACE###-php54-fpm.service.d/EnvironmentFile
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/local/bin/docker-stoprm ###NAMESPACE###-php54-fpm
+ExecStartPre=/usr/bin/docker run    --name ###NAMESPACE###-php54-fpm \
+				    				$VOLUMESFROM \
+                                    -d \
+                                    $LINKSTO \
+                                    ###DOCKERNAMESPACE###/php54-fpm
+ExecStart=/usr/bin/docker attach ###NAMESPACE###-php54-fpm
+ExecStop=/usr/local/bin/docker-stoprm ###NAMESPACE###-php54-fpm
+
+[Install]
+WantedBy=multi-user.target
