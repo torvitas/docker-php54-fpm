@@ -1,8 +1,0 @@
-DOCKERNAMESPACE = torvitas
-NAMESPACE = docker
-
-# do not change anything below this line
-DOCKERPREFIX = $(DOCKERNAMESPACE)/
-DOCKERNAMESPACEPLACEHOLDER = \#\#\#DOCKERNAMESPACE\#\#\#
-NAMESPACEPLACEHOLDER = \#\#\#NAMESPACE\#\#\#
-SYSTEMDSERVICEFOLDER = /etc/systemd/system/
